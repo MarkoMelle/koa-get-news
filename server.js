@@ -2,7 +2,7 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const axios = require('axios');
 const koaSlow = require('koa-slow');
-const cors = require('koa-cors');
+const cors = require('@koa/cors');
 
 const app = new Koa();
 const router = new Router();
@@ -11,7 +11,7 @@ const delay = koaSlow({ delay: 3000 });
 const NEWS_API_KEY = 'e8b58b7078694608825d928f17664614';
 
 
-
+app.use(cors);
 router.get('/news', async (ctx) => {
   try {
     const response = await axios.get('https://newsapi.org/v2/top-headlines', {
@@ -41,7 +41,7 @@ router.get('/news', async (ctx) => {
     ctx.status = 500;
   }
 });
-app.use(cors);
+
 app.use(delay);
 app.use(router.routes());
 
