@@ -11,7 +11,7 @@ const delay = koaSlow({ delay: 3000 });
 const NEWS_API_KEY = 'e8b58b7078694608825d928f17664614';
 
 
-app.use(cors);
+app.use(cors());
 router.get('/news', async (ctx) => {
   try {
     const response = await axios.get('https://newsapi.org/v2/top-headlines', {
